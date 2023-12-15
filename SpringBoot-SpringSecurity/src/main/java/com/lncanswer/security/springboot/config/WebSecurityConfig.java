@@ -48,12 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //配置安全拦截机制
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity
+        httpSecurity.csrf().disable() //屏蔽拦截csrf跨站请求
                 .authorizeRequests()
-                .antMatchers("/r/**").authenticated() //拦截/r/**路径 需要认真
-                .anyRequest().permitAll() //其他路径请求全部放心
+                .antMatchers("/r/r1").hasAuthority("p1") //访问r1路径必须用p1权限
+                .antMatchers("/r/r2").hasAuthority("p2")
+                .antMatchers("/r/**").authenticated() //拦截/r/**路径 需要认证
+                .anyRequest().permitAll() //其他路径请求全部放行
                 .and()
                 .formLogin() //允许表单登录
+                .loginPage("/login-view") //指定自己的登录页面
+                .loginProcessingUrl("/login")//指定处理的url 提交表单的路径
                 .successForwardUrl("/login-success"); //自定义表单登录页面地址跳转
     }
 }
