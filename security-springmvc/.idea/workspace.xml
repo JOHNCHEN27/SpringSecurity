@@ -9,7 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e43bfc4d-9a27-4101-94c2-e48a6993eca1" name="Changes" comment="" />
+    <list default="true" id="e43bfc4d-9a27-4101-94c2-e48a6993eca1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/src/main/java/lncanswer/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../security-springsecurity/src/test/java/lncanswer/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +32,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -43,20 +57,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/Java/Spring/SpringSecurity/Auth-springsecurity/security-springmvc",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Java/Spring/SpringSecurity/Auth-springsecurity/security-springmvc&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;82524db731acea521e1df03a8c6683c5&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,7 +85,10 @@
       <updated>1702473412865</updated>
       <workItem from="1702473413848" duration="479000" />
       <workItem from="1702473899684" duration="5000" />
-      <workItem from="1702473923490" duration="569000" />
+      <workItem from="1702473923490" duration="1899000" />
+      <workItem from="1702522937139" duration="1418000" />
+      <workItem from="1702524725076" duration="1715000" />
+      <workItem from="1702604129584" duration="558000" />
     </task>
     <servers />
   </component>
