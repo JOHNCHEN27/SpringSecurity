@@ -10,16 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e43bfc4d-9a27-4101-94c2-e48a6993eca1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/src/main/java/lncanswer/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../security-springsecurity/src/test/java/lncanswer/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringBoot-SpringSecurity/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringBoot-SpringSecurity/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringBoot-SpringSecurity/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringBoot-SpringSecurity/src/main/webapp/WEB-INF/view/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringBoot-SpringSecurity/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpringBoot-SpringSecurity/src/main/webapp/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +85,8 @@
       <workItem from="1702473923490" duration="1899000" />
       <workItem from="1702522937139" duration="1418000" />
       <workItem from="1702524725076" duration="1715000" />
-      <workItem from="1702604129584" duration="558000" />
+      <workItem from="1702604129584" duration="4977000" />
+      <workItem from="1702613238296" duration="307000" />
     </task>
     <servers />
   </component>
