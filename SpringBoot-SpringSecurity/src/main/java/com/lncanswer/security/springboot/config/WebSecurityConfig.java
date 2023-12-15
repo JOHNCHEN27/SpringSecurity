@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -21,21 +22,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     //配置用户服务信息
-    @Bean
-    public UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-
-        //硬编码创建用户 --实际中要从数据库查询
-        manager.createUser(User.withUsername("zhangsan").password("123").authorities("p1").build());
-        manager.createUser(User.withUsername("lisi").password("123").authorities("p2").build());
-        return manager;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//
+//        //硬编码创建用户 --实际中要从数据库查询
+//        manager.createUser(User.withUsername("zhangsan").password("123").authorities("p1").build());
+//        manager.createUser(User.withUsername("lisi").password("123").authorities("p2").build());
+//        return manager;
+//    }
 
     //密码编码方式
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        //这里暂时采用明文编码方式（按字符串进行编码 用户输入123 就是123） 实际不推荐
+//        return NoOpPasswordEncoder.getInstance();
+//    }
+
     @Bean
     public PasswordEncoder passwordEncoder(){
-        //这里暂时采用明文编码方式（按字符串进行编码 用户输入123 就是123） 实际不推荐
-        return NoOpPasswordEncoder.getInstance();
+        //采用加密编码 对密码进行加密
+        return new BCryptPasswordEncoder();
     }
 
     //配置安全拦截机制
