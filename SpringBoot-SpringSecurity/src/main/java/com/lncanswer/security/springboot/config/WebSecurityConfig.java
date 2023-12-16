@@ -2,7 +2,10 @@ package com.lncanswer.security.springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -19,6 +22,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  * @date 2023/12/15 16:59
  */
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true) //开启@PreAuthorize, @Secured基于方法授权
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -49,11 +53,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //配置安全拦截机制
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
+        //按照顺序执行 规则的顺序是重要的,更具体的规则应该先写
         httpSecurity
                 .csrf().disable() //屏蔽拦截csrf跨站请求
                 .authorizeRequests()
                 .antMatchers("/r/r1").hasAuthority("p1") //访问r1路径必须用p1权限
-                .antMatchers("/r/r2").hasAuthority("p2")
+                .antMatchers("/r/r2").hasAuthority("p2") //基于web授权
                 .antMatchers("/r/**").authenticated() //拦截/r/**路径 需要认证
                 .anyRequest().permitAll() //其他路径请求全部放行
                 .and()

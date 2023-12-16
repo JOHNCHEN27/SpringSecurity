@@ -1,5 +1,6 @@
 package com.lncanswer.security.springboot.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+    /**
+     * 基于方法授权可使用 -- @PreAuthorize,@PostAuthorize, @Secured三类注解。
+     * @PreAuthorize 是比较推荐 需要在配置类开启 编写简单
+     * @Secured 一般不适用 需要在配置类开启使用 编写复杂
+     * @PostAuthrize比较少用
+     */
+
 
     /**
      * 登录路径接口
@@ -30,6 +38,7 @@ public class LoginController {
      * 测试资源1
      * @return
      */
+    @PreAuthorize("hasAuthority('p1')")
     @GetMapping(value = "/r/r1",produces = {"text/plain;charset=UTF-8"})
     public String r1(){
         return getUserName() + " 访问资源1";
