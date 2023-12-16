@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,7 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //配置安全拦截机制
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.csrf().disable() //屏蔽拦截csrf跨站请求
+        httpSecurity
+                .csrf().disable() //屏蔽拦截csrf跨站请求
                 .authorizeRequests()
                 .antMatchers("/r/r1").hasAuthority("p1") //访问r1路径必须用p1权限
                 .antMatchers("/r/r2").hasAuthority("p2")
@@ -58,6 +60,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin() //允许表单登录
                 .loginPage("/login-view") //指定自己的登录页面
                 .loginProcessingUrl("/login")//指定处理的url 提交表单的路径
-                .successForwardUrl("/login-success"); //自定义表单登录页面地址跳转
+                .successForwardUrl("/login-success")//自定义表单登录页面地址跳转
+                .permitAll()
+                .and()
+                .sessionManagement()//自定义会话控制 如果需要session则创建
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+                .logout()
+                .logoutUrl("/logout") //自定义退出触发地址
+                .logoutSuccessUrl("/login-view?logout"); //自定义退出成功之后跳转的url
     }
 }
