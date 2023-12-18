@@ -28,7 +28,7 @@ import static org.bouncycastle.cms.RecipientId.password;
  * @date 2023/12/18 16:28
  */
 @Configuration
-@EnableAuthorizationServer
+@EnableAuthorizationServer //标记是授权服务
 public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     //注入令牌类型对象
     @Autowired
@@ -58,7 +58,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()// 使用in‐memory存储
                 .withClient("c1")// 用来标识客户的id
                 .secret(new BCryptPasswordEncoder().encode("secret")) //客户端安全码
-                .resourceIds("res1")
+                .resourceIds("res1") //资源id 需要和资源服务保持一致
                 .authorizedGrantTypes("authorization_code",
                         "password", "client_credentials", "implicit", "refresh_token")// 该client允许的授权类型authorization_code, password, refresh_token, implicit, client_credentials
                 .scopes("all")// 允许的授权范围
