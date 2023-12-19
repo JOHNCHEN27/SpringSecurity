@@ -11,6 +11,8 @@
     <modules>
         <module>security-uaa</module>
         <module>security-order</module>
+        <module>security-discovery</module>
+        <module>security-gateway</module>
     </modules>
 
     <parent>

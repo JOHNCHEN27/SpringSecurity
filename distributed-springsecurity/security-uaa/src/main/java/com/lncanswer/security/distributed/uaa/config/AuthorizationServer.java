@@ -28,7 +28,6 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
-import static org.bouncycastle.cms.RecipientId.password;
 
 /**
  * @author LNC
