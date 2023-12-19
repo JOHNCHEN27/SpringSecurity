@@ -1,5 +1,6 @@
 package com.lncanswer.security.distributed.uaa.service;
 
+import com.alibaba.fastjson.JSON;
 import com.lncanswer.security.distributed.uaa.dao.UserMapper;
 import com.lncanswer.security.distributed.uaa.model.UserDto;
 import org.springframework.security.core.userdetails.User;
@@ -46,7 +47,9 @@ public class SpringDataUserDetailsService implements UserDetailsService {
             List<String> permissions = userMapper.findPermissionsByUserId(user.getId());
             String[] strings = new String[permissions.size()];
             permissions.toArray(strings);
-            return User.withUsername(user.getUsername()).password(user.getPassword()).authorities(strings).build();
+            //将user转化为JSON 将user整体存入userDetails
+            String principal = JSON.toJSONString(user);
+            return User.withUsername(principal).password(user.getPassword()).authorities(strings).build();
         }
         //没有用户则返回null
         System.out.println("为查询到用户");

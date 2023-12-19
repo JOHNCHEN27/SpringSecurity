@@ -42,7 +42,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").access("#oauth2.hasScope('all')") //与授权服务scope保持一致 需要验证
+                .antMatchers("/**").access("#oauth2.hasScope('ROLE_ADMIN')") //与授权服务scope保持一致 需要验证
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //取消session
     }
