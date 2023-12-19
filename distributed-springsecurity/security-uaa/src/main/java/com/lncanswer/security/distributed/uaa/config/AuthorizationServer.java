@@ -7,17 +7,26 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.util.Arrays;
 
 import static org.bouncycastle.cms.RecipientId.password;
 
@@ -46,6 +55,24 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    //注入令牌converter
+    @Resource
+    private JwtAccessTokenConverter accessTokenConverter;
+
+    //注入密码编码格式
+    @Resource
+    public PasswordEncoder passwordEncoder;
+
+    //客户端详细信息从数据库读取
+    @Bean
+    public ClientDetailsService clientDetailsService(DataSource dataSource) {
+        ClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
+        ((JdbcClientDetailsService)
+                clientDetailsService).setPasswordEncoder(passwordEncoder);
+        return clientDetailsService;
+    }
+
+
     /**
      * 重写配置客户端详细服务
      * @param clients
@@ -55,15 +82,17 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients)
             throws Exception {
 // clients.withClientDetails(clientDetailsService);
-        clients.inMemory()// 使用in‐memory存储
-                .withClient("c1")// 用来标识客户的id
-                .secret(new BCryptPasswordEncoder().encode("secret")) //客户端安全码
-                .resourceIds("res1") //资源id 需要和资源服务保持一致
-                .authorizedGrantTypes("authorization_code",
-                        "password", "client_credentials", "implicit", "refresh_token")// 该client允许的授权类型authorization_code, password, refresh_token, implicit, client_credentials
-                .scopes("all")// 允许的授权范围
-                .autoApprove(false)//加上验证回调地址
-                .redirectUris("http://www.baidu.com");
+//        clients.inMemory()// 使用in‐memory存储
+//                .withClient("c1")// 用来标识客户的id
+//                .secret(new BCryptPasswordEncoder().encode("secret")) //客户端安全码
+//                .resourceIds("res1") //资源id 需要和资源服务保持一致
+//                .authorizedGrantTypes("authorization_code",
+//                        "password", "client_credentials", "implicit", "refresh_token")// 该client允许的授权类型authorization_code, password, refresh_token, implicit, client_credentials
+//                .scopes("all")// 允许的授权范围
+//                .autoApprove(false)//加上验证回调地址
+//                .redirectUris("http://www.baidu.com");
+
+        clients.withClientDetails(clientDetailsService);
     }
 
 
@@ -77,17 +106,28 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         service.setClientDetailsService(clientDetailsService); //令牌对应的客户端详情服务
         service.setSupportRefreshToken(true); //令牌刷新策略
         service.setTokenStore(tokenStore); //令牌类型
+        //令牌增强
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
+        service.setTokenEnhancer(tokenEnhancerChain);
         service.setAccessTokenValiditySeconds(7200); // 令牌默认有效期2小时
         service.setRefreshTokenValiditySeconds(259200); // 刷新令牌默认有效期3天
         return service;
     }
 
     //设置授权模式授权码Bean如何存取
+//    @Bean
+//    public AuthorizationCodeServices authorizationCodeServices() {
+//        //设置授权码模式的授权码如何存取，暂时采用内存方式
+//        return new InMemoryAuthorizationCodeServices();
+//    }
+
     @Bean
-    public AuthorizationCodeServices authorizationCodeServices() {
-        //设置授权码模式的授权码如何存取，暂时采用内存方式
-        return new InMemoryAuthorizationCodeServices();
+    public AuthorizationCodeServices authorizationCodeServices(DataSource dataSource) {
+        //从数据库中读取授权码模式
+        return new JdbcAuthorizationCodeServices(dataSource);//设置授权码模式的授权码如何存取
     }
+
 
     /**
      * 令牌访问端点
